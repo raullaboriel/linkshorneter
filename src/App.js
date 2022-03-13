@@ -24,9 +24,16 @@ function App() {
     setLink(e.target.value);
   }
 
-  const onDelete = (shorteredRoute) => {
-    const tempList = [...shorteredLinks].filter(item => item.shorteredRoute !== shorteredRoute);
-    setShorteredLinks(tempList);
+  const onDelete = async (shorteredRoute) => {
+    try {
+      await axios.delete('http://localhost:5000/', { data: { shorteredRoute } })
+        .then(() => {
+          const tempList = [...shorteredLinks].filter(item => item.shorteredRoute !== shorteredRoute);
+          setShorteredLinks(tempList);
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   const validURL = (str) => {
@@ -61,11 +68,17 @@ function App() {
     }
 
     if (validURL(link)) {
+      let originalLink = link;
+
+      if (originalLink.substring(0, 7) !== 'http://' && originalLink.substring(0, 8) !== 'https://') {
+        originalLink = 'http://' + originalLink;
+      }
+
       try {
-        await axios.post(`http://localhost:5000/`, { id: 0, originalLink: link, user: null })
+        await axios.post(`http://localhost:5000/`, { id: 0, originalLink, user: null })
           .then(response => {
             const tempList = [...shorteredLinks];
-            tempList.unshift({ link: link, shorteredRoute: response.data.shorteredRoute });
+            tempList.unshift({ link: originalLink, shorteredRoute: response.data.shorteredRoute });
             setShorteredLinks(tempList);
             handleAlertShow('linkAdded')
           })
@@ -88,8 +101,10 @@ function App() {
                 <div className="d-flex flex-row mb-4">
                   <form className="col-12" onSubmit={(e) => onShortLink(e)}>
                     <div className="row justify-content-center flex-nowrap">
-                      <input style={{ 'backgroundColor': 'rgb(58,59,61)' }} autoComplete="off" type="text" name='link' onChange={(e) => handleInputChange(e)} value={link} className="form-control text-white flex-fill mr-2 p-4 border-0" placeholder="Ingresa tu enlace" />
-                      <button style={{ 'backgroundColor': 'rgb(79,70,229)' }} className="btn border-0 col-3 font-weight-bold btn-primary">Recortar</button>
+                      <input style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }} autoComplete="off" type="text" name='link' onChange={(e) => handleInputChange(e)} value={link} className="form-control text-white flex-fill mr-2 p-4 border-0" placeholder="Ingresa tu enlace" />
+                      <button style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }} className="btn border-0 col-3 font-weight-bold btn-primary">
+                        Recortar
+                      </button>
                     </div>
                   </form>
                 </div>

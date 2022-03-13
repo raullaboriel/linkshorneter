@@ -11,7 +11,7 @@ const ShorteredLink = (props) => {
             <div className='col-8'>
                 <div className='row justify-content-end'>
                     <div className='btn-link text-truncate text-right align-self-center col'><Link to={`/${props.item.shorteredRoute}`} target="_blank">{`localhost:3000/${props.item.shorteredRoute}`}</Link></div>
-                    <button style={{'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(58,59,61, 0.2)' }} onClick={() => {navigator.clipboard.writeText(`localhost:3000/${props.item.shorteredRoute}`); props.handleAlertShow('linkCopied')}} className="btn font-weight-bold mr-2 col-4 col-lg-2 col-md-2">
+                    <button style={{'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(58,59,61, 0.6)' }} onClick={() => {navigator.clipboard.writeText(`localhost:3000/${props.item.shorteredRoute}`); props.handleAlertShow('linkCopied')}} className="btn font-weight-bold mr-2 col-4 col-lg-2 col-md-2">
                         Copiar
                     </button>
                     <button onClick={() => props.onDelete(props.item.shorteredRoute)} className="btn btn-danger col-3 col-lg-1 col-md-2">

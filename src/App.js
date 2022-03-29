@@ -1,146 +1,77 @@
-import ShorteredLink from "./components/ShorteredLink";
 import React, { useState } from 'react';
-import NavBar from "./components/NavBar";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
 import RedirectPage from "./components/RedirectPage";
-import axios from "axios";
+import "./style.css"; //style sheet 
+import Login from "./components/Login";
+import Home from "./components/Home";
+import NavBar from './components/NavBar';
 import ls from 'local-storage'
-import "./style.css"; //style sheet
+import SignUp from './components/SignUp';
+import axios from 'axios';
+
 
 function App() {
+  const [user, setUser] = useState(undefined);
   const [shorteredLinks, setShorteredLinks] = useState(ls.get('linkshortener') ? ls.get('linkshortener') : []);
-  const [link, setLink] = useState('');
-  const [alerts, setAlerts] = useState({ linkAdded: false, invalidLink: false, noLink: false, linkCopied: false })
 
   React.useEffect(() => {
     ls.set('linkshortener', shorteredLinks)
-  }, [shorteredLinks])
+  }, [shorteredLinks]);
 
-  const handleInputChange = (e) => {
-    setLink(e.target.value);
-  }
-
-  const onDelete = async (shorteredRoute) => {
-    try {
-      await axios.delete('http://localhost:5000/', { data: { shorteredRoute } })
-        .then(() => {
-          const tempList = [...shorteredLinks].filter(item => item.shorteredRoute !== shorteredRoute);
-          setShorteredLinks(tempList);
+  React.useEffect(() => {
+    const restoreSession = async () => {
+      await axios.post('http://localhost:5000/user/restoresession', null, { withCredentials: true })
+        .then(response => {
+          setUser(response.data.user);
         });
-    } catch (e) {
-      console.log(e);
     }
-  }
+    restoreSession();
+  }, []);
 
-  const validURL = (str) => {
-    var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-    return !!pattern.test(str);
-  }
-
-  const handleAlertShow = (alert) => {
-    setAlerts({
-      ...alerts,
-      [alert]: true
-    });
-
-    setTimeout(() => {
-      setAlerts({
-        linkAdded: false, invalidLink: false, noLink: false, linkCopied: false
-      });
-    }, 7000);
-  }
-
-  const onShortLink = async (e) => {
-    e.preventDefault();
-
-    if (link.trim().length === 0) {
-      handleAlertShow('noLink');
-      return;
-    }
-
-    if (validURL(link)) {
-      let originalLink = link;
-
-      if (originalLink.substring(0, 7) !== 'http://' && originalLink.substring(0, 8) !== 'https://') {
-        originalLink = 'http://' + originalLink;
-      }
-
-      try {
-        await axios.post(`http://localhost:5000/`, { id: 0, originalLink, user: null })
+  React.useEffect(() => {
+    const loadShorteredLinks = async () => {
+      if (typeof user !== 'undefined' && user !== null) {
+        await axios.post('http://localhost:5000/user/shorteredlinks', null, { withCredentials: true })
           .then(response => {
-            const tempList = [...shorteredLinks];
-            tempList.unshift({ link: originalLink, shorteredRoute: response.data.shorteredRoute });
-            setShorteredLinks(tempList);
-            handleAlertShow('linkAdded')
+            let tempShorteredList = [];
+            response.data.map(item => tempShorteredList.push({ shorteredRoute: item.shorteredroute, link: item.originallink }))
+            setShorteredLinks(tempShorteredList);
           })
-      } catch (err) {
-        console.log(err);
       }
-    } else {
-      handleAlertShow('invalidLink');
     }
+    loadShorteredLinks();
+  }, [user])
+
+  if (typeof user === undefined) {
+    return (
+      <div className="loader-inner bg-transparent text-center text-secondary">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+        <br />
+      </div>
+    );
   }
 
   return (
     <Router>
-      <Switch>
-        <Route path='/' exact>
-          <div className="App">
-            <NavBar />
-            <div className="container mt-4 py-4">
-              <div className="mr-4 ml-4">
-                <div className="d-flex flex-row mb-4">
-                  <form className="col-12" onSubmit={(e) => onShortLink(e)}>
-                    <div className="row justify-content-center flex-nowrap">
-                      <input style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }} autoComplete="off" type="text" name='link' onChange={(e) => handleInputChange(e)} value={link} className="form-control text-white flex-fill mr-2 p-4 border-0" placeholder="Ingresa tu enlace" />
-                      <button style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }} className="btn border-0 col-3 font-weight-bold btn-primary">
-                        Recortar
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                {
-                  alerts.linkAdded === true &&
-                  <div className="alert alert-success" role="alert">
-                    ¡Tu link ha sido recortado!
-                  </div>
-                }
-                {
-                  alerts.linkCopied === true &&
-                  <div className="alert alert-success" role="alert">
-                    Enlace copiado en el portapapeles.
-                  </div>
-                }
-                {
-                  alerts.invalidLink === true &&
-                  <div className="alert alert-danger" role="alert">
-                    No es posible recortar este link, no es un URL valido.
-                  </div>
-                }
-                {
-                  alerts.noLink === true &&
-                  <div className="alert alert-danger" role="alert">
-                    Por favor ingresa un URL valido.
-                  </div>
-                }
-                <div className="col-12 pl-0 pr-0 justify-content-center flex-fill mt-4 ">
-                  {shorteredLinks.map((item, index) => <ShorteredLink item={item} onDelete={onDelete} handleAlertShow={handleAlertShow} key={index} />)}
-                </div>
-              </div>
-            </div>
-          </div>
+      <NavBar user={user} />
+      <Switch >
+        <Route exact path="/">
+          <Home shorteredLinks={shorteredLinks} setShorteredLinks={setShorteredLinks} />
         </Route>
-        <Route path='/:shorteredRoute'>
-          <RedirectPage shorteredLinks={shorteredLinks} />
+        <Route path="/login" >
+          <Login setUser={setUser} user={user} />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/:shorteredRoute">
+          <RedirectPage />
         </Route>
       </Switch>
     </Router>

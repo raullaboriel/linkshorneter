@@ -42,7 +42,7 @@ const ShorteredLink = (props) => {
             <div className='col-8'>
                 <div className='row justify-content-end'>
                     <div className='btn-link text-truncate text-right align-self-center col'>
-                        <Link to={`/${props.item.shorteredRoute}`} target="_blank">{origin + `/${props.item.shorteredRoute}`}</Link>
+                        <Link to={`/${props.item.shorteredRoute}`} target="_blank">{origin() + `/${props.item.shorteredRoute}`}</Link>
                     </div>
                     {copyButton()}
                     < button onClick={() => props.onDelete(props.item)} className="btn btn-sm btn-danger col-3 col-lg-1 col-md-2">

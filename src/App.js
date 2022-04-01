@@ -5,7 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-//import RedirectPage from "./components/RedirectPage";
+import RedirectPage from "./components/RedirectPage";
 import "./style.css"; //style sheet 
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -74,9 +74,9 @@ function App() {
           <NavBar user={user} />
           <SignUp />
         </Route>
-        {/*         <Route path="/:shorteredRoute">
+        <Route path="/:shorteredRoute">
           <RedirectPage />
-        </Route> */}
+        </Route>
       </Switch>
     </Router>
   );

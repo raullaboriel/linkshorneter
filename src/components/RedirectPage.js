@@ -4,14 +4,15 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import "../style.css"; //style sheet
 import { Link } from 'react-router-dom';
+import origin from '../origin';
 
-
-const RedirectPage = (props) => {
+const RedirectPage = () => {
 
     const { shorteredRoute } = useParams();
     const [data, setData] = useState(null);
 
     useEffect(() => {
+        console.log(shorteredRoute);
         const getOriginalLink = async () => {
             try {
                 const response = await axios.get(origin() + `/shorteredlink/${shorteredRoute}`);

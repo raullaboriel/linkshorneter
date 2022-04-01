@@ -17,7 +17,6 @@ import origin from './origin';
 
    
 function App() {
-  console.log('a');
   const [user, setUser] = useState(undefined);
   const [shorteredLinks, setShorteredLinks] = useState(ls.get('linkshortener') ? ls.get('linkshortener') : []);
 
@@ -47,18 +46,7 @@ function App() {
       }
     }
     loadShorteredLinks();
-  }, [user])
-
-  if (typeof user === 'undefined') {
-    return (
-      <div className="loader-inner bg-transparent text-center text-secondary">
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-        <br />
-      </div>
-    );
-  }
+  }, [user]);
 
   return (
     <Router>
@@ -75,7 +63,7 @@ function App() {
           <NavBar user={user} />
           <SignUp />
         </Route>
-        <Route path="/:shorteredRoute">
+        <Route path="linkshortener/:shorteredRoute">
           <RedirectPage />
         </Route>
       </Switch>

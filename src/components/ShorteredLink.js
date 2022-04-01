@@ -14,7 +14,7 @@ const ShorteredLink = (props) => {
     const copyButton = () => {
         if (showCopied) {
             return (
-                <button style={{ 'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(79,167,69, 0.6)' }} className="btn btn-sm font-weight-bold mr-2 col-4 col-lg-2 col-md-2">
+                <button  className="btn btn-sm font-weight-bold mr-2 col-4 col-lg-2 col-md-2" style={{ 'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(79,167,69, 0.6)' }}>
                     ¡Copiado!
                 </button>
             )
@@ -28,7 +28,7 @@ const ShorteredLink = (props) => {
     }
 
     return (
-        <div style={{ 'backgroundColor': 'rgb(37,37,38, 0.8)' }} className="d-flex flex-row p-3 rounded-lg mb-2 justify-content-between">
+        <div style={{ 'backgroundColor': 'rgb(33, 33, 33, 0.4)' }} className="d-flex flex-row p-3 rounded-lg mb-2 justify-content-between">
             <div title={props.item.link} style={{ 'color': 'rgb(145,148,152)' }} className="align-self-center text-truncate flex-fill">
                 {props.item.link}
             </div>

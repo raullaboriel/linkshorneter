@@ -126,6 +126,17 @@ const Home = (props) => {
                     <div className="col-12 pl-0 pr-0 justify-content-center flex-fill mt-4 ">
                         {props.shorteredLinks.map((item, index) => <ShorteredLink item={item} onDelete={onDelete} key={index} />)}
                     </div>
+                    { props.shorteredLinks.length  === 0 &&
+                    <div style={{ 'height': '400px', 'width': 'auto' }} >
+                        <div className="d-flex flex-row align-items-center h-50">
+                            <div className="col-6 mx-auto">
+                                <div className="jumbotron m-0 bg-transparent text-center text-white text-muted">
+                                    No hay enlaces
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
                 </div>
             </div>
         </div>

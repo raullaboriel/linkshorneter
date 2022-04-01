@@ -5,7 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import RedirectPage from "./components/RedirectPage";
+//import RedirectPage from "./components/RedirectPage";
 import "./style.css"; //style sheet 
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -13,6 +13,7 @@ import NavBar from './components/NavBar';
 import ls from 'local-storage'
 import SignUp from './components/SignUp';
 import axios from 'axios';
+import origin from './origin';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
 
   React.useEffect(() => {
     const restoreSession = async () => {
-      await axios.post('http://localhost:5000/user/restoresession', null, { withCredentials: true })
+      await axios.post(origin() + '/user/restoresession', null, { withCredentials: true })
         .then(response => {
           setUser(response.data.user);
         });
@@ -36,7 +37,7 @@ function App() {
   React.useEffect(() => {
     const loadShorteredLinks = async () => {
       if (typeof user !== 'undefined' && user !== null) {
-        await axios.post('http://localhost:5000/user/shorteredlinks', null, { withCredentials: true })
+        await axios.post(origin() + '/user/shorteredlinks', null, { withCredentials: true })
           .then(response => {
             let tempShorteredList = [];
             response.data.map(item => tempShorteredList.push({ shorteredRoute: item.shorteredroute, link: item.originallink, userId: item.user }))
@@ -73,7 +74,9 @@ function App() {
           <NavBar user={user} />
           <SignUp />
         </Route>
-
+        {/*         <Route path="/:shorteredRoute">
+          <RedirectPage />
+        </Route> */}
       </Switch>
     </Router>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios";
 import ShorteredLink from "./ShorteredLink";
 import Alert from './Alert';
+import origin from '../origin.js';
 
 const Home = (props) => {
     const [link, setLink] = useState('');
@@ -37,7 +38,7 @@ const Home = (props) => {
         }
 
         try {
-            await axios.delete('http://localhost:5000/shorteredlink', { data: { shorteredRoute: shorteredLink.shorteredRoute }, withCredentials: true })
+            await axios.delete(origin() + '/shorteredlink', { data: { shorteredRoute: shorteredLink.shorteredRoute }, withCredentials: true })
                 .then(() => {
                     const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
                     props.setShorteredLinks(tempList);
@@ -81,7 +82,7 @@ const Home = (props) => {
             }
 
             try {
-                await axios.post(`http://localhost:5000/shorteredlink`, { originalLink }, { withCredentials: true })
+                await axios.post(origin() + '/shorteredlink', { originalLink }, { withCredentials: true })
                     .then(response => {
                         const tempList = [...props.shorteredLinks];
                         const shorteredLink = response.data.shorteredLink;

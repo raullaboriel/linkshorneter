@@ -2,9 +2,11 @@ import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../style.css'
+import origin from '../origin.js';
+
 const NavBar = (props) => {
     const logout = async () => {
-        await axios.post('http://localhost:5000/user/logout', null, { withCredentials: true })
+        await axios.post(origin() + '/user/logout', null, { withCredentials: true })
             .then(() => {
                 window.location.reload(false);
             })

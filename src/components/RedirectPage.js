@@ -14,7 +14,7 @@ const RedirectPage = (props) => {
     useEffect(() => {
         const getOriginalLink = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/shorteredlink/${shorteredRoute}`);
+                const response = await axios.get(origin() + `/shorteredlink/${shorteredRoute}`);
                 const tempData = response.data;
                 setData(tempData);
             } catch (err) {

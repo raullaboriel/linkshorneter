@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom';
+import origin from '../origin.js';
 
 const SignUp = () => {
     const [data, setData] = useState({
@@ -27,7 +28,7 @@ const SignUp = () => {
             password: data.password
         }
         if (isDataValid.username && isDataValid.email && isDataValid.password) {
-            await axios.post('http://localhost:5000/user', user)
+            await axios.post(origin() + '/user', user)
                 .then(() => {
                     setSignedUp(true);
                 })
@@ -52,7 +53,7 @@ const SignUp = () => {
 
     React.useEffect(() => {
         const checkEmailUsername = async () => {
-            await axios.post('http://localhost:5000/user/check', { username: data.username, email: data.email })
+            await axios.post(origin() + '/user/check', { username: data.username, email: data.email })
                 .then((response) => {
                     setIsDataValid(isDataValid => ({
                         ...isDataValid,

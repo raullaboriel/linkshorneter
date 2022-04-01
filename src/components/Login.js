@@ -1,4 +1,5 @@
 import React from 'react'
+import origin from '../origin.js';
 import axios from 'axios';
 
 const Login = (props) => {
@@ -15,7 +16,7 @@ const Login = (props) => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/user/login', data, { withCredentials: true })
+    await axios.post(origin() + '/user/login', data, { withCredentials: true })
       .then((res) => {
         props.setUser(res.data);
         setIsInfoOk(true);

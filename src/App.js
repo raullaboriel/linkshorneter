@@ -63,6 +63,9 @@ function App() {
   return (
     <Router>
       <Switch >
+        <Redirect from="/linkshortener/" to="/" />
+        <Redirect from="/linkshortener/login" to="/login" />
+        
         <Route exact path="/">
           <NavBar user={user} />
           <Home shorteredLinks={shorteredLinks} setShorteredLinks={setShorteredLinks} user={user} />

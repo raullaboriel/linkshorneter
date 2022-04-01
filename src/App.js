@@ -49,7 +49,7 @@ function App() {
     loadShorteredLinks();
   }, [user])
 
-  if (typeof user === undefined) {
+  if (typeof user === 'undefined') {
     return (
       <div className="loader-inner bg-transparent text-center text-secondary">
         <div className="spinner-border" role="status">

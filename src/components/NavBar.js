@@ -13,12 +13,12 @@ const NavBar = (props) => {
     }
     return (
         <nav style={{ 'backgroundColor': 'rbg(5, 5, 5)' }} className="navbar pb-3 pt-3 navbar-dark">
-            <Link className="navbar-brand" style={{ 'fontWeight': 'bold', 'fontSize': '25px' }} to={'/'}>
+            <Link className="navbar-brand" style={{ 'fontWeight': 'bold', 'fontSize': '25px' }} to={'/linkshortener'}>
                 Link Shortener
             </Link>
             {
                 typeof props.user === 'undefined' || props.user === null ?
-                    <Link to='/login' className="fa fa-user-circle fa-2x text-white no-underline" aria-hidden="true"></Link>
+                    <Link to='/linkshortener/login' className="fa fa-user-circle fa-2x text-white no-underline" aria-hidden="true"></Link>
                     :
                     <div className="dropdown">
                         <button className="btn h5 btn-link font-weight-bold dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">

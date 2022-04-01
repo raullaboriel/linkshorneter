@@ -17,7 +17,6 @@ import origin from './origin';
 
 
 function App() {
-  console.log(origin());
   const [user, setUser] = useState(undefined);
   const [shorteredLinks, setShorteredLinks] = useState(ls.get('linkshortener') ? ls.get('linkshortener') : []);
 
@@ -63,18 +62,15 @@ function App() {
   return (
     <Router>
       <Switch >
-        <Redirect from="/linkshortener/" to="/" />
-        <Redirect from="/linkshortener/login" to="/login" />
-        
-        <Route exact path="/">
+        <Route exact path={['/', "/linkshortener/"]}>
           <NavBar user={user} />
           <Home shorteredLinks={shorteredLinks} setShorteredLinks={setShorteredLinks} user={user} />
         </Route>
-        <Route path="/login" >
+        <Route path={["/login", '/linkshortener/login']}>
           <NavBar user={user} />
           {typeof user === 'undefined' || user === null ? <Login setUser={setUser} user={user} /> : <Redirect to='/' />}
         </Route>
-        <Route path="/signup">
+        <Route path={["/signup", '/linkshortener/signup']}>
           <NavBar user={user} />
           <SignUp />
         </Route>

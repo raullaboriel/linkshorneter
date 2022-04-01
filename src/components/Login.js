@@ -1,6 +1,7 @@
 import React from 'react'
 import origin from '../origin.js';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
   const [data, setData] = React.useState({ username: '', password: '' });
@@ -58,6 +59,18 @@ const Login = (props) => {
               className='form-control border-0 text-white font-weight-bold' type='submit' >
               Iniciar sesión
             </button>
+          </div>
+        </div>
+        <div className='row justify-content-center mt-2'>
+          <div className='col'>
+            <span style={{ 'fontSize': '14px' }} className='text-white text-muted'>
+              ¿No tienes una cuenta?
+              <Link className='ml-1' to='/linkshortener/signup'>
+                <strong>
+                  Registrate
+                </strong>
+              </Link>
+            </span>
           </div>
         </div>
       </form>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import origin from '../origin.js';
 
@@ -156,8 +157,20 @@ const SignUp = () => {
                     <div className='col'>
                         <button style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }}
                             className='form-control border-0 text-white font-weight-bold' type='submit' >
-                            Iniciar sesión
+                            Registrarte
                         </button>
+                    </div>
+                </div>
+                <div className='row justify-content-center mt-2'>
+                    <div className='col'>
+                        <span style={{ 'fontSize': '14px' }} className='text-white text-muted'>
+                            ¿Ya tienes una cuenta?
+                            <Link className='ml-1' to='/linkshortener/login'>
+                                <strong>
+                                    Inicia sesión
+                                </strong>
+                            </Link>
+                        </span>
                     </div>
                 </div>
             </form>

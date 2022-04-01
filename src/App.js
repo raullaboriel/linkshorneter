@@ -17,6 +17,7 @@ import origin from './origin';
 
 
 function App() {
+  console.log(origin());
   const [user, setUser] = useState(undefined);
   const [shorteredLinks, setShorteredLinks] = useState(ls.get('linkshortener') ? ls.get('linkshortener') : []);
 

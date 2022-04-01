@@ -29,11 +29,17 @@ const Home = (props) => {
         if (!showShortenURL) setShowShortenURL(true);
     }
 
-    const onDelete = async (shorteredRoute) => {
+    const onDelete = async (shorteredLink) => {
+        if (typeof props.user === 'undefined' || props.user === null) {
+            const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+            props.setShorteredLinks(tempList);
+            return;
+        }
+
         try {
-            await axios.delete('http://localhost:5000/', { data: { shorteredRoute }, withCredentials: true})
+            await axios.delete('http://localhost:5000/shorteredlink', { data: { shorteredRoute: shorteredLink.shorteredRoute }, withCredentials: true })
                 .then(() => {
-                    const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredRoute);
+                    const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
                     props.setShorteredLinks(tempList);
                 });
         } catch (e) {
@@ -75,14 +81,15 @@ const Home = (props) => {
             }
 
             try {
-                await axios.post(`http://localhost:5000/`, { originalLink }, {withCredentials: true})
+                await axios.post(`http://localhost:5000/shorteredlink`, { originalLink }, { withCredentials: true })
                     .then(response => {
-                        const tempList = props.shorteredLinks;
-                        tempList.unshift({ link: originalLink, shorteredRoute: response.data.shorteredRoute });
+                        const tempList = [...props.shorteredLinks];
+                        const shorteredLink = response.data.shorteredLink;
+                        tempList.unshift({ link: originalLink, shorteredRoute: shorteredLink.shorteredRoute, userId: shorteredLink.userId });
                         props.setShorteredLinks(tempList);
                         handleNotify('success', '¡Tu link ha sido recortado!');
                         setShowShortenURL(false);
-                        setLink(`localhost:3000/${response.data.shorteredRoute}`)
+                        setLink(`localhost:3000/${shorteredLink.shorteredRoute}`)
                     })
             } catch (err) {
                 console.log(err);

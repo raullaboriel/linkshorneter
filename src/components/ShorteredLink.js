@@ -38,12 +38,12 @@ const ShorteredLink = (props) => {
                         <Link to={`/${props.item.shorteredRoute}`} target="_blank">{`localhost:3000/${props.item.shorteredRoute}`}</Link>
                     </div>
                     {copyButton()}
-                    <button onClick={() => props.onDelete(props.item.shorteredRoute)} className="btn btn-sm btn-danger col-3 col-lg-1 col-md-2">
+                    < button onClick={() => props.onDelete(props.item)} className="btn btn-sm btn-danger col-3 col-lg-1 col-md-2">
                         <i className="fa fa-trash" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

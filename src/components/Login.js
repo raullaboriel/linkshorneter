@@ -1,14 +1,9 @@
 import React from 'react'
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {
   const [data, setData] = React.useState({ username: '', password: '' });
   const [isInfoOk, setIsInfoOk] = React.useState(true);
-
-  if (typeof props.user !== 'undefined' && props.user !== null) {
-    return (<Redirect to="/"></Redirect>);
-  }
 
   const handleDataChange = (e) => {
     setData({

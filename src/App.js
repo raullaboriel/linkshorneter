@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
 import RedirectPage from "./components/RedirectPage";
 import "./style.css"; //style sheet 
@@ -38,7 +39,7 @@ function App() {
         await axios.post('http://localhost:5000/user/shorteredlinks', null, { withCredentials: true })
           .then(response => {
             let tempShorteredList = [];
-            response.data.map(item => tempShorteredList.push({ shorteredRoute: item.shorteredroute, link: item.originallink }))
+            response.data.map(item => tempShorteredList.push({ shorteredRoute: item.shorteredroute, link: item.originallink, userId: item.user }))
             setShorteredLinks(tempShorteredList);
           })
       }
@@ -59,15 +60,17 @@ function App() {
 
   return (
     <Router>
-      <NavBar user={user} />
       <Switch >
         <Route exact path="/">
-          <Home shorteredLinks={shorteredLinks} setShorteredLinks={setShorteredLinks} />
+          <NavBar user={user} />
+          <Home shorteredLinks={shorteredLinks} setShorteredLinks={setShorteredLinks} user={user} />
         </Route>
         <Route path="/login" >
-          <Login setUser={setUser} user={user} />
+          <NavBar user={user} />
+          {typeof user === 'undefined' || user === null ? <Login setUser={setUser} user={user} /> : <Redirect to='/' />}
         </Route>
         <Route path="/signup">
+          <NavBar user={user} />
           <SignUp />
         </Route>
         <Route path="/:shorteredRoute">

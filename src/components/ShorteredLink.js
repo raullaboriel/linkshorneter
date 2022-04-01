@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 const ShorteredLink = (props) => {
     const [showCopied, setShowCopied] = React.useState(false);
 
+    const origin = () => {
+        if (process.env.NODE_ENV === 'production') {
+            return 'linkshortener-api.herokuapp.com'
+        }
+        return 'localhost:5000'
+    }
+
     const onCopyLink = () => {
         setShowCopied(true);
         setTimeout(() => {
@@ -14,7 +21,7 @@ const ShorteredLink = (props) => {
     const copyButton = () => {
         if (showCopied) {
             return (
-                <button  className="btn btn-sm font-weight-bold mr-2 col-4 col-lg-2 col-md-2" style={{ 'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(79,167,69, 0.6)' }}>
+                <button className="btn btn-sm font-weight-bold mr-2 col-4 col-lg-2 col-md-2" style={{ 'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(79,167,69, 0.6)' }}>
                     ¡Copiado!
                 </button>
             )
@@ -35,7 +42,7 @@ const ShorteredLink = (props) => {
             <div className='col-8'>
                 <div className='row justify-content-end'>
                     <div className='btn-link text-truncate text-right align-self-center col'>
-                        <Link to={`/${props.item.shorteredRoute}`} target="_blank">{`localhost:3000/${props.item.shorteredRoute}`}</Link>
+                        <Link to={`/${props.item.shorteredRoute}`} target="_blank">{origin + `/${props.item.shorteredRoute}`}</Link>
                     </div>
                     {copyButton()}
                     < button onClick={() => props.onDelete(props.item)} className="btn btn-sm btn-danger col-3 col-lg-1 col-md-2">

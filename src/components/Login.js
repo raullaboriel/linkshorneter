@@ -65,7 +65,7 @@ const Login = (props) => {
           <div className='col'>
             <span style={{ 'fontSize': '14px' }} className='text-white text-muted'>
               ¿No tienes una cuenta?
-              <Link className='ml-1' to='/linkshortener/signup'>
+              <Link className='ml-1' to='/signup'>
                 <strong>
                   Registrate
                 </strong>

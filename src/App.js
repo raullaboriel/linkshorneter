@@ -63,7 +63,7 @@ function App() {
           <NavBar user={user} />
           <SignUp />
         </Route>
-        <Route path="linkshortener/:shorteredRoute">
+        <Route path="/:shorteredRoute">
           <RedirectPage />
         </Route>
       </Switch>

@@ -165,7 +165,7 @@ const SignUp = () => {
                     <div className='col'>
                         <span style={{ 'fontSize': '14px' }} className='text-white text-muted'>
                             ¿Ya tienes una cuenta?
-                            <Link className='ml-1' to='/linkshortener/login'>
+                            <Link className='ml-1' to='/login'>
                                 <strong>
                                     Inicia sesión
                                 </strong>

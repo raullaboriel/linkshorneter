@@ -94,7 +94,12 @@ const Home = (props) => {
                         props.setShorteredLinks(tempList);
                         handleNotify('success', '¡Tu link ha sido recortado!');
                         setShowShortenURL(false);
-                        setLink(`localhost:3000/${shorteredLink.shorteredRoute}`)
+                        setLink(
+                            process.env.NODE_ENV === 'production' ?
+                                'lilink.herokuapp.com' + `/${shorteredLink.shorteredRoute}`
+                                :
+                                'localhost:3000' + `/${shorteredLink.shorteredRoute}`
+                        )
                     })
             } catch (err) {
                 console.log(err);

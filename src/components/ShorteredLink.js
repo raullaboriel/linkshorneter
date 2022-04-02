@@ -8,7 +8,7 @@ const ShorteredLink = (props) => {
         if (process.env.NODE_ENV === 'production') {
             return 'linkshortener-api.herokuapp.com'
         }
-        return 'localhost:5000'
+        return 'localhost:3000'
     }
 
     const onCopyLink = () => {
@@ -28,7 +28,7 @@ const ShorteredLink = (props) => {
         }
 
         return (
-            <button className="btn btn-sm font-weight-bold mr-2 col col-lg-2 col-md-2" style={{ 'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(58,59,61, 0.6)' }} onClick={() => { navigator.clipboard.writeText(`localhost:3000/${props.item.shorteredRoute}`); onCopyLink() }}>
+            <button className="btn btn-sm font-weight-bold mr-2 col col-lg-2 col-md-2" style={{ 'color': 'rgb(164,167,171)', 'backgroundColor': 'rgb(58,59,61, 0.6)' }} onClick={() => { navigator.clipboard.writeText(origin() + `/${props.item.shorteredRoute}`); onCopyLink() }}>
                 Copiar
             </button>
         )

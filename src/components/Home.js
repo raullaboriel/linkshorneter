@@ -122,7 +122,7 @@ const Home = (props) => {
                                             Recortar
                                         </button>
                                         :
-                                        <button type='button' onClick={() => { navigator.clipboard.writeText(`localhost:3000/${props.shorteredLinks[0].shorteredRoute}`); setIsLinkCopied(true) }} style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }} className="btn border-0 col-3 font-weight-bold btn-primary">
+                                        <button type='button' onClick={() => { navigator.clipboard.writeText(link); setIsLinkCopied(true) }} style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }} className="btn border-0 col-3 font-weight-bold btn-primary">
                                             {isLinkCopied ? '¡Copiado!' : '¡Copiar!'}
                                         </button>
                                 }

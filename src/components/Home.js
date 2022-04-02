@@ -96,7 +96,7 @@ const Home = (props) => {
                         setShowShortenURL(false);
                         setLink(
                             process.env.NODE_ENV === 'production' ?
-                                'lilink.herokuapp.com' + `/${shorteredLink.shorteredRoute}`
+                                'https://lilink.herokuapp.com' + `/${shorteredLink.shorteredRoute}`
                                 :
                                 'localhost:3000' + `/${shorteredLink.shorteredRoute}`
                         )

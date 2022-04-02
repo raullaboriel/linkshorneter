@@ -6,7 +6,7 @@ const ShorteredLink = (props) => {
 
     const origin = () => {
         if (process.env.NODE_ENV === 'production') {
-            return 'linkshortener-api.herokuapp.com'
+            return 'lilink.herokuapp.com'
         }
         return 'localhost:3000'
     }

@@ -31,7 +31,8 @@ const Home = (props) => {
     }
 
     const onDelete = async (shorteredLink) => {
-        if (typeof props.user === 'undefined' || props.user === null) {
+        //When cookies working
+        /*         if (typeof props.user === 'undefined' || props.user === null) {
             const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
             props.setShorteredLinks(tempList);
             return;
@@ -45,7 +46,10 @@ const Home = (props) => {
                 });
         } catch (e) {
             console.log(e);
-        }
+        } */
+        const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+        props.setShorteredLinks(tempList);
+        return;
     }
 
     const validURL = (str) => {
@@ -106,7 +110,7 @@ const Home = (props) => {
                     <div className="d-flex flex-row mb-4">
                         <form className="col-12" onSubmit={(e) => onShortLink(e)}>
                             <div className="row justify-content-center flex-nowrap">
-                                <input style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }} autoComplete="off" type="text" name='link' onChange={(e) => handleInputChange(e)} value={link} className="form-control text-white flex-fill mr-2 p-4 border-0" placeholder="Ingresa tu enlace" />
+                                <input style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }} autoComplete="off" type="text" name='link' autocorrect="off" autocapitalize="none" onChange={(e) => handleInputChange(e)} value={link} className="form-control text-white flex-fill mr-2 p-4 border-0" placeholder="Ingresa tu enlace" />
                                 {
                                     showShortenURL ?
                                         <button type="submit" style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }} className="btn border-0 col-3 font-weight-bold btn-primary">
@@ -126,16 +130,16 @@ const Home = (props) => {
                     <div className="col-12 pl-0 pr-0 justify-content-center flex-fill mt-4 ">
                         {props.shorteredLinks.map((item, index) => <ShorteredLink item={item} onDelete={onDelete} key={index} />)}
                     </div>
-                    { props.shorteredLinks.length  === 0 &&
-                    <div style={{ 'height': '400px', 'width': 'auto' }} >
-                        <div className="d-flex flex-row align-items-center h-50">
-                            <div className="col-6 mx-auto">
-                                <div className="jumbotron m-0 bg-transparent text-center text-white text-muted">
-                                    No hay enlaces
+                    {props.shorteredLinks.length === 0 &&
+                        <div style={{ 'height': '400px', 'width': 'auto' }} >
+                            <div className="d-flex flex-row align-items-center h-50">
+                                <div className="col-6 mx-auto">
+                                    <div className="jumbotron m-0 bg-transparent text-center text-white text-muted">
+                                        No hay enlaces
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     }
                 </div>
             </div>

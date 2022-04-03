@@ -66,7 +66,7 @@ const Home = (props) => {
         if (isLinkCopied) {
             setTimeout(() => {
                 setIsLinkCopied(false);
-            }, 2000);
+            }, 3000);
         }
     }, [isLinkCopied])
 
@@ -96,9 +96,9 @@ const Home = (props) => {
                         setShowShortenURL(false);
                         setLink(
                             process.env.NODE_ENV === 'production' ?
-                                'https://lilink.herokuapp.com' + `/${shorteredLink.shorteredRoute}`
+                                `https://lilink.herokuapp.com/${shorteredLink.shorteredRoute}`
                                 :
-                                'localhost:3000' + `/${shorteredLink.shorteredRoute}`
+                                `localhost:3000/${shorteredLink.shorteredRoute}`
                         )
                     })
             } catch (err) {
@@ -122,8 +122,13 @@ const Home = (props) => {
                                             Recortar
                                         </button>
                                         :
-                                        <button type='button' onClick={() => { navigator.clipboard.writeText(link); setIsLinkCopied(true) }} style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }} className="btn border-0 col-3 font-weight-bold btn-primary">
-                                            {isLinkCopied ? '¡Copiado!' : '¡Copiar!'}
+                                        <button
+                                            type='button'
+                                            onClick={() => { navigator.clipboard.writeText(link); setIsLinkCopied(true) }}
+                                            style={{ 'backgroundColor': 'rgb(79,70,229)', 'fontSize': '18px' }}
+                                            className={`btn col-3 font-weight-bold btn-primary ${isLinkCopied ? 'border-succes border-lg' : 'border-0'} ${isLinkCopied && 'border-success'}`}
+                                        >
+                                            {isLinkCopied ? '¡Copiado!' : 'Copiar'}
                                         </button>
                                 }
                             </div>

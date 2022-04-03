@@ -89,7 +89,7 @@ const SignUp = () => {
                         {!isDataValid.username ?
                             <div className='row text-left justify-content-center'>
                                 <div className='col position-sticky'>
-                                    <span className='text-danger'><small className='font-weight-bold'>Este usuario no esta disponible</small></span>
+                                    <span className='text-danger'><small className='font-weight-bold'>Este usuario no está disponible</small></span>
                                 </div>
                             </div>
                             :
@@ -110,7 +110,7 @@ const SignUp = () => {
                             !isDataValid.email ?
                                 <div className='row text-left justify-content-center'>
                                     <div className='col position-sticky'>
-                                        <span className='text-danger'><small className='font-weight-bold'>Este correo no esta disponible</small></span>
+                                        <span className='text-danger'><small className='font-weight-bold'>Este correo no está disponible</small></span>
                                     </div>
                                 </div>
                                 :

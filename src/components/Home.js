@@ -43,6 +43,10 @@ const Home = (props) => {
         }
 
         if (validURL(link)) {
+            if(link.startsWith('https://lilink.herokuapp.com') || link.startsWith('lilink.herokuapp.com')){
+                addToast('danger', 'Ese link ya está recortado.');
+                return;
+            }
             let originalLink = link;
 
             if (originalLink.substring(0, 7) !== 'http://' && originalLink.substring(0, 8) !== 'https://') {

@@ -13,7 +13,7 @@ const ToastNotify = ({ Toasts, setToasts }) => {
             if (Toasts.length) {
                 deleteToast();
             }
-        }, 4000);
+        }, 5000);
 
         return () => {
             clearInterval(interval);
@@ -22,7 +22,7 @@ const ToastNotify = ({ Toasts, setToasts }) => {
 
     return (
         Toasts.map((toast, index) => (
-            <div key={index} className={`alert alert-${(toast.type.toLowerCase())} alert-item position-relative`}>
+            <div key={index} className={`ml-1 alert alert-${(toast.type.toLowerCase())} alert-item position-relative`}>
                 {toast.message}
             </div>
         ))

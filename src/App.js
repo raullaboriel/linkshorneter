@@ -15,7 +15,6 @@ import SignUp from './components/SignUp';
 import axios from 'axios';
 import origin from './origin';
 
-   
 function App() {
   const [user, setUser] = useState(undefined);
   const [shorteredLinks, setShorteredLinks] = useState(ls.get('linkshortener') ? ls.get('linkshortener') : []);
@@ -33,6 +32,29 @@ function App() {
     }
     restoreSession();
   }, []);
+
+  const deleteShorteredLink = async (shorteredLink) => {
+    const tempList = [...shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+    setShorteredLinks(tempList);
+    return;
+
+    //When cookies working
+    /*         if (typeof props.user === 'undefined' || props.user === null) {
+        const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+        props.setShorteredLinks(tempList);
+        return;
+    }
+
+    try {
+        await axios.delete(origin() + '/shorteredlink', { data: { shorteredRoute: shorteredLink.shorteredRoute }, withCredentials: true })
+            .then(() => {
+                const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+                props.setShorteredLinks(tempList);
+            });
+    } catch (e) {
+        console.log(e);
+    } */
+  }
 
   React.useEffect(() => {
     const loadShorteredLinks = async () => {
@@ -53,7 +75,7 @@ function App() {
       <Switch >
         <Route exact path={['/', "/linkshortener/"]}>
           <NavBar user={user} />
-          <Home shorteredLinks={shorteredLinks} setShorteredLinks={setShorteredLinks} user={user} />
+          <Home shorteredLinks={shorteredLinks} setShorteredLinks={setShorteredLinks} user={user} deleteShorteredLink={deleteShorteredLink} />
         </Route>
         <Route path={["/login", '/linkshortener/login']}>
           <NavBar user={user} />

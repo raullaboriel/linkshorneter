@@ -56,7 +56,7 @@ const ShorteredLink = (props) => {
             <div className='col'>
                 <div className='d-flex flex-row'>
                     {copyButton()}
-                    < button onClick={() => props.onDelete(props.item)} className="btn btn btn-danger col-lg-3 col-md-3 col-2">
+                    < button onClick={() => props.deleteShorteredLink(props.item)} className="btn btn btn-danger col-lg-3 col-md-3 col-2">
                         <i className="fa fa-trash" aria-hidden="true"></i>
                     </button>
                 </div>

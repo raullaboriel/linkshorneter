@@ -84,7 +84,7 @@ const SignUp = () => {
             <form onSubmit={e => signUp(e)} className='d-flex flex-column form rounded-lg'>
                 <div className='row text-left justify-content-center mt-1 mb-1'>
                     <div className='col'>
-                        <input autocapitalize="none" onChange={e => handleDataChange(e)} value={data.username} placeholder='Nombre de usuario' name='username' required style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }}
+                        <input autoCapitalize="none" onChange={e => handleDataChange(e)} value={data.username} placeholder='Nombre de usuario' name='username' required style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }}
                             className={`form-control ${!isDataValid.username ? 'border-danger' : data.username !== '' ? 'border-success' : 'border-0'} text-white`} type='text' />
                         {!isDataValid.username ?
                             <div className='row text-left justify-content-center'>

@@ -35,7 +35,7 @@ const Login = (props) => {
         <div className='row text-left justify-content-center'>
           <div className='col'>
             <span className='text-white text-muted'>Usuario</span>
-            <input  autocapitalize="none" onChange={(e) => handleDataChange(e)} value={data.username} name='username' required style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }}
+            <input  autoCapitalize="none" onChange={(e) => handleDataChange(e)} value={data.username} name='username' required style={{ 'backgroundColor': 'rgb(58,59,61)', 'fontWeight': 'bold' }}
               className='form-control border-0 text-white' type='text' />
           </div>
         </div>

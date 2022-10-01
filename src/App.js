@@ -44,22 +44,22 @@ function App() {
     );
     setShorteredLinks(tempList);
 
-    if (typeof props.user === 'undefined' || props.user === null) {
-      const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
-      props.setShorteredLinks(tempList);
+    if (typeof user === 'undefined' || user === null) {
+      const tempList = [...shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+      setShorteredLinks(tempList);
       return;
     }
 
     try {
       await axios.delete(origin() + '/shorteredlink', { data: { shorteredRoute: shorteredLink.shorteredRoute }, withCredentials: true })
         .then(() => {
-          const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
-          props.setShorteredLinks(tempList);
+          const tempList = [...shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+          setShorteredLinks(tempList);
         });
     } catch (e) {
       console.log(e);
     }
-    
+
     return;
   };
 

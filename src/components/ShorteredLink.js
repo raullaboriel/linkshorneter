@@ -1,15 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import origin from "../origin";
 
 const ShorteredLink = (props) => {
   const [showCopied, setShowCopied] = React.useState(false);
-
-  const origin = () => {
-    if (process.env.NODE_ENV === "production") {
-      return "https://lilink.herokuapp.com";
-    }
-    return "localhost:3000";
-  };
 
   const onCopyLink = () => {
     setShowCopied(true);

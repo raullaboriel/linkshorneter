@@ -43,24 +43,24 @@ function App() {
       (item) => item.shorteredRoute !== shorteredLink.shorteredRoute
     );
     setShorteredLinks(tempList);
-    return;
 
-    //When cookies working
-    /*         if (typeof props.user === 'undefined' || props.user === null) {
-        const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
-        props.setShorteredLinks(tempList);
-        return;
+    if (typeof props.user === 'undefined' || props.user === null) {
+      const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+      props.setShorteredLinks(tempList);
+      return;
     }
 
     try {
-        await axios.delete(origin() + '/shorteredlink', { data: { shorteredRoute: shorteredLink.shorteredRoute }, withCredentials: true })
-            .then(() => {
-                const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
-                props.setShorteredLinks(tempList);
-            });
+      await axios.delete(origin() + '/shorteredlink', { data: { shorteredRoute: shorteredLink.shorteredRoute }, withCredentials: true })
+        .then(() => {
+          const tempList = [...props.shorteredLinks].filter(item => item.shorteredRoute !== shorteredLink.shorteredRoute);
+          props.setShorteredLinks(tempList);
+        });
     } catch (e) {
-        console.log(e);
-    } */
+      console.log(e);
+    }
+    
+    return;
   };
 
   React.useEffect(() => {

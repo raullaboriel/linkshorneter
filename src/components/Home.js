@@ -47,8 +47,8 @@ const Home = (props) => {
 
     if (validURL(link)) {
       if (
-        link.startsWith("https://lilink.herokuapp.com") ||
-        link.startsWith("lilink.herokuapp.com")
+        link.startsWith("https://lilink.click") ||
+        link.startsWith("lilink.click")
       ) {
         addToast("danger", "Ese link ya está recortado.");
         return;
@@ -83,7 +83,7 @@ const Home = (props) => {
             setShowShortenURL(false);
             setLink(
               process.env.NODE_ENV === "production"
-                ? `https://lilink.herokuapp.com/${shorteredLink.shorteredRoute}`
+                ? `lilink.click/${shorteredLink.shorteredRoute}`
                 : `localhost:3000/${shorteredLink.shorteredRoute}`
             );
           });

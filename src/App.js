@@ -97,6 +97,9 @@ function App() {
             user={user}
             deleteShorteredLink={deleteShorteredLink}
           />
+          <footer className="fixed-bottom text-right p-2">
+            <span className="text-muted mr-2">By: Jose Laboriel</span>
+          </footer>
         </Route>
         <Route path={["/login", "/linkshortener/login"]}>
           <NavBar user={user} />

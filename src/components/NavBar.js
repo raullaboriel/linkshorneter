@@ -22,7 +22,7 @@ const NavBar = (props) => {
         style={{ fontWeight: "bold", fontSize: "25px" }}
         to={"/"}
       >
-        Link Shortener
+        Lilink ✨
       </Link>
       {typeof props.user === "undefined" || props.user === null ? (
         <Link

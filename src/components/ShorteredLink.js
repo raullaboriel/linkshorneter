@@ -6,7 +6,7 @@ const ShorteredLink = (props) => {
 
   const origin = () => {
     if (process.env.NODE_ENV === "production") {
-      return "https://lilink.click";
+      return "lilink.click";
     }
     return "localhost:3000";
   };

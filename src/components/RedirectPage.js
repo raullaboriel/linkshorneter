@@ -39,7 +39,7 @@ const RedirectPage = () => {
                     <span className="sr-only">Loading...</span>
                 </div>
                 <br />
-                <span>Redireccionado...</span>
+                <span>Redireccionando...</span>
             </div>
         );
     } else if(data === undefined) {
